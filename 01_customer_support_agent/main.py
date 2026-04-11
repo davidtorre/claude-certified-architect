@@ -35,13 +35,14 @@ def load_system_prompt():
 
 def check_prerequisite(tool_name, tool_history):
     """Block process_refund unless get_customer has already been called successfully."""
-    # TODO: Check if tool_name is "process_refund" and if "get_customer" is NOT
-    # in tool_history. If the prerequisite is missing, return a dict with:
-    #   error: True
-    #   errorCategory: "validation"
-    #   isRetryable: True
-    #   message: explaining that customer identity must be verified first
-    # Otherwise return None to allow the tool call.
+    if tool_name == "process_refund" and "get_customer" not in tool_history:
+        error = {
+            "error": True,
+            "errorCategory": "validation",
+            "isRetryable": True,
+            "message": "Customer identity must be verified with get_customer before processing a refund.",
+        }
+        return error
     return None
 
 
@@ -54,14 +55,15 @@ def post_tool_use_hook(tool_name, tool_input, tool_result):
     Checks process_refund calls: if the refund amount exceeds MAX_REFUND_AMOUNT,
     replace the result with a structured error redirecting to escalation.
     """
-    # TODO: Check if tool_name is "process_refund" and if tool_input["amount"]
-    # exceeds MAX_REFUND_AMOUNT. If it does, return a replacement result dict with:
-    #   error: True
-    #   errorCategory: "policy_violation"
-    #   isRetryable: False
-    #   message: explaining the amount exceeds the $500 limit and must be escalated
-    #   action: "escalate_to_human"
-    # Otherwise return tool_result unchanged.
+    if tool_name == "process_refund" and tool_input["amount"] > MAX_REFUND_AMOUNT:
+        error = {
+            "error": True,
+            "errorCategory": "policy_violation",
+            "isRetryable": False,
+            "message": f"Refund amount ${tool_input['amount']} exceeds the ${MAX_REFUND_AMOUNT} limit and must be escalated to a human agent.",
+            "action": "escalate_to_human",
+        }
+        return error
     return tool_result
 
 
