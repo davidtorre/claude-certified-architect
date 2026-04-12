@@ -1,0 +1,19 @@
+{
+  "name": "code-quality",
+  "version": "1.0.0",
+  "description": "Code quality tools: linting, review, and best practices",
+  "commands": [
+    {
+      "name": "lint",
+      "description": "Run linters and report issues",
+      "file": "commands/lint.md"
+    }
+  ],
+  "agents": [
+    {
+      "name": "code-reviewer",
+      "description": "Reviews code for quality and best practices",
+      "file": "agents/code-reviewer.md"
+    }
+  ]
+}
