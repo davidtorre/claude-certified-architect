@@ -36,13 +36,13 @@ def load_system_prompt():
 def check_prerequisite(tool_name, tool_history):
     """Block process_refund unless get_customer has already been called successfully."""
     if tool_name == "process_refund" and "get_customer" not in tool_history:
-        error = {
+        result = {
             "error": True,
             "errorCategory": "validation",
             "isRetryable": True,
-            "message": "Customer identity must be verified with get_customer before processing a refund.",
+            "message": "Customer identity must be verified via get_customer before processing a refund.",
         }
-        return error
+        return result
     return None
 
 
@@ -55,15 +55,15 @@ def post_tool_use_hook(tool_name, tool_input, tool_result):
     Checks process_refund calls: if the refund amount exceeds MAX_REFUND_AMOUNT,
     replace the result with a structured error redirecting to escalation.
     """
-    if tool_name == "process_refund" and tool_input["amount"] > MAX_REFUND_AMOUNT:
-        error = {
+    if tool_name == "process_refund" and tool_input.get("amount", 0) > MAX_REFUND_AMOUNT:
+        result = {
             "error": True,
             "errorCategory": "policy_violation",
             "isRetryable": False,
-            "message": f"Refund amount ${tool_input['amount']} exceeds the ${MAX_REFUND_AMOUNT} limit and must be escalated to a human agent.",
+            "message": f"Refund amount ${tool_input['amount']:.2f} exceeds the ${MAX_REFUND_AMOUNT} policy limit. This refund must be escalated to a human agent.",
             "action": "escalate_to_human",
         }
-        return error
+        return result
     return tool_result
 
 

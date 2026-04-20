@@ -1,0 +1,6 @@
+{
+  "enabledMcpjsonServers": [
+    "my-database",
+    "search-engine"
+  ]
+}

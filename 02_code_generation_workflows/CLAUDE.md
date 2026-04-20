@@ -1,3 +1,5 @@
+@import coding_standards.md
+
 # Lab 02 — Code Generation with Claude Code
 
 ## Coding conventions
@@ -17,6 +19,5 @@
 - `mcp_server/inventory_server.py` — custom MCP server exposing inventory data (FastMCP)
 - `app/sample_app.py` — sample inventory management module
 - `app/sample_app.test.py` — tests for sample_app.py
-- `manage.py` — `python manage.py restart` restores starter state, `python manage.py solve` applies all configurations
+- `manage.py` — `python manage.py restart` removes generated config files and restores starter state
 - `_manage/starter/` — starter files (CLAUDE.md, app/sample_app.py, app/sample_app.test.py)
-- `_manage/solved/` — completed configurations (CLAUDE.md with @import, rules, commands, .mcp.json)

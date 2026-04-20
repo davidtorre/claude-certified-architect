@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "my-database": {
+      "command": "python3",
+      "args": ["mcp_server.py"],
+      "env": {
+        "DB_URL": "postgresql://localhost:5432/mydb"
+      }
+    },
+    "search-engine": {
+      "command": "cmd",
+      "args": ["/c", "npx", "@company/search-mcp"]
+    }
+  }
+}

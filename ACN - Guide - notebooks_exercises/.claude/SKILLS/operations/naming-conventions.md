@@ -1,0 +1,1 @@
+# Reference doc for naming rules

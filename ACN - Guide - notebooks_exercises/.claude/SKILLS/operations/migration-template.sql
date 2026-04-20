@@ -1,0 +1,1 @@
+# SQL template for migrations

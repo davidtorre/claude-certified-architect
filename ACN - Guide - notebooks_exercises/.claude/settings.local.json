@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp:*)",
+      "Bash(mkdir -p \"C:/data/Proyectos-2/IA Enginer/projects/claude-certified-architect/01_customer_support_agent/.claude/plugins/\")",
+      "Bash(cp -r \"C:/data/Proyectos-2/IA Enginer/projects/claude-certified-architect/01_customer_support_agent/code-quality/\" \"C:/data/Proyectos-2/IA Enginer/projects/claude-certified-architect/01_customer_support_agent/.claude/plugins/code-quality/\")",
+      "Bash(C:/data/Proyectos-2/IA Enginer/projects/claude-certified-architect/.venv/Scripts/python.exe:*)",
+      "Bash(python -m venv .venv)",
+      "Bash(C:/data/Proyectos-2/IA Enginer/projects/claude-certified-architect/notebooks_exercises/.venv/Scripts/python.exe:*)"
+    ]
+  }
+}

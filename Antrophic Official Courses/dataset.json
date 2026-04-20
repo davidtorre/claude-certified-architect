@@ -1,0 +1,767 @@
+[
+  {
+    "prompt_inputs": {
+      "height": "",
+      "weight": "",
+      "goal": "Calculate BMI and provide health recommendations",
+      "restrictions": "Do not provide medical advice"
+    },
+    "solution_criteria": [
+      "System handles empty/null values gracefully without crashing",
+      "Response clearly indicates which input values are missing",
+      "Provides guidance on what information is needed to proceed"
+    ],
+    "task_description": "",
+    "scenario": "Testing with empty or null input values"
+  },
+  {
+    "prompt_inputs": {
+      "height": "a",
+      "weight": "b",
+      "goal": "c",
+      "restrictions": "d"
+    },
+    "solution_criteria": [
+      "Handles single character inputs gracefully without crashing",
+      "Provides appropriate error message or clarification request for invalid inputs"
+    ],
+    "task_description": "",
+    "scenario": "Testing with single character inputs"
+  },
+  {
+    "prompt_inputs": {
+      "height": "178",
+      "weight": "82",
+      "goal": "Analyze the provided health and fitness data to generate a comprehensive personalized wellness plan that addresses cardiovascular health, muscle development, nutritional balance, and mental well-being. The plan should include specific recommendations for exercise routines tailored to the individual's physical characteristics, dietary guidelines considering macronutrient distribution and caloric intake, stress management techniques, sleep optimization strategies, and progress tracking metrics. Additionally, incorporate evidence-based information about how body composition affects metabolic rate, the relationship between BMI and health outcomes across different age groups and populations, the importance of progressive overload in strength training, the role of micronutrients in energy production and recovery, and how lifestyle factors such as sleep quality, stress levels, and social connections impact overall health trajectories. The analysis should synthesize information from exercise physiology, nutritional science, and behavioral psychology to create an integrated approach that considers the person's baseline metrics and long-term sustainability of recommended changes.",
+      "restrictions": "Do not provide personalized medical diagnoses, prescribe specific medications, or suggest treatment for existing medical conditions. Do not make assumptions about the person's age, gender, or current fitness level beyond what can be inferred from height and weight. Do not recommend extreme dietary approaches, excessive caloric restriction, or unsustainable exercise protocols. All recommendations must be general wellness guidance suitable for healthy adults without known contraindications. Do not provide specific supplement recommendations without noting the importance of consulting healthcare providers. Frame all advice as general information rather than personalized medical guidance."
+    },
+    "solution_criteria": [
+      "Addresses all components mentioned in the goal (exercise, nutrition, stress management, sleep, progress tracking) without providing medical diagnoses",
+      "Respects all stated restrictions by avoiding medical advice, extreme recommendations, and unfounded assumptions",
+      "Provides actionable, evidence-based recommendations grounded in exercise physiology and nutritional science",
+      "Maintains appropriate disclaimers that guidance is general wellness information, not personalized medical advice"
+    ],
+    "task_description": "",
+    "scenario": "Testing with very long text strings (1000+ characters)"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175 cm",
+      "weight": "82.5 kg",
+      "goal": "Calculate BMI and categorize health status using special characters in the output (e.g., \u2713, \u2717, \u2192, \u00a9)",
+      "restrictions": "Response must use special symbols (*, \u2020, \u2021, \u00a7, \u00b6, \u00a9, \u00ae, \u2122) to denote footnotes and emphasis; do not provide personalized medical advice; format output as a structured report"
+    },
+    "solution_criteria": [
+      "BMI is correctly calculated (weight in kg / (height in m)\u00b2) and equals approximately 26.8",
+      "Health status is accurately categorized (overweight for BMI 25-29.9)",
+      "Special characters and symbols are properly integrated into the response format",
+      "No personalized medical advice is provided; only general health information is included"
+    ],
+    "task_description": "",
+    "scenario": "Testing with special characters and symbols"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Calculate BMI and identify the numerical category (underweight, normal weight, overweight, or obese) based on standard BMI ranges",
+      "restrictions": "Use only the provided height and weight values; express the final BMI as a number rounded to one decimal place; do not provide personalized health advice or medical recommendations"
+    },
+    "solution_criteria": [
+      "BMI is calculated correctly using the formula: weight (kg) / (height (m))\u00b2",
+      "BMI result is expressed as a single numerical value rounded to one decimal place",
+      "The appropriate BMI category is identified based on standard ranges (underweight <18.5, normal 18.5-24.9, overweight 25-29.9, obese \u226530)"
+    ],
+    "task_description": "",
+    "scenario": "Testing with numbers and numerical sequences"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175cm",
+      "weight": "82kg",
+      "goal": "Calculate BMI and categorize health status",
+      "restrictions": "Response must handle mixed case input variations (e.g., 'HEIGHT', 'Weight', 'GOAL') and normalize them correctly without errors"
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI as 26.8 regardless of input case variations",
+      "Properly categorizes result as 'Overweight' (BMI 25-29.9)",
+      "Handles all case variations of input keys without producing errors or incorrect results"
+    ],
+    "task_description": "",
+    "scenario": "Testing with mixed case variations"
+  },
+  {
+    "prompt_inputs": {
+      "height": "   180   ",
+      "weight": "75\n",
+      "goal": "Calculate BMI and categorize health status based on WHO standards",
+      "restrictions": "Response must handle inconsistent whitespace/formatting in input values and present output in a clean, standardized format"
+    },
+    "solution_criteria": [
+      "Correctly parses height and weight despite whitespace and formatting variations",
+      "Calculates BMI accurately using the formula: weight(kg) / (height(m))\u00b2",
+      "Categorizes result according to WHO standards (underweight <18.5, normal 18.5-24.9, overweight 25-29.9, obese \u226530)",
+      "Output is presented in clean, standardized format"
+    ],
+    "task_description": "",
+    "scenario": "Testing with whitespace and formatting variations"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175 cm",
+      "weight": "72 kg",
+      "goal": "Calculate BMI and provide personalized health recommendations in multiple languages including fran\u00e7ais, \u4e2d\u6587, \u0627\u0644\u0639\u0631\u0628\u064a\u0629, and \u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac to ensure accessibility for international users",
+      "restrictions": "Response must handle unicode characters correctly without corruption, maintain proper formatting for right-to-left languages, and avoid any medical diagnoses\u2014only provide general wellness suggestions based on BMI category"
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI (\u224823.5) and classifies it in the normal weight category",
+      "Provides health recommendations in at least three of the requested languages with proper unicode rendering",
+      "Avoids medical diagnoses and stays within general wellness guidance boundaries",
+      "Maintains proper text directionality and formatting for all international character sets used"
+    ],
+    "task_description": "",
+    "scenario": "Testing with unicode and international characters"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "75",
+      "goal": "Calculate BMI and provide health recommendations based on the height and weight.",
+      "restrictions": "The response should not include any medical advice and should only provide general information based on the calculated BMI."
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI using the provided height and weight values",
+      "Provides the same response when given identical inputs twice",
+      "Adheres to the restriction of providing only general information without medical advice"
+    ],
+    "task_description": "",
+    "scenario": "Testing with repeated identical inputs"
+  },
+  {
+    "prompt_inputs": {
+      "height": "180",
+      "weight": "65",
+      "goal": "Calculate BMI and provide health recommendations",
+      "restrictions": "The person is an elite athlete with high muscle mass. Do not classify them as underweight despite low BMI. Provide recommendations appropriate for athletic individuals, not sedentary populations."
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI as approximately 20.1",
+      "Acknowledges the contradiction between low BMI and athletic status, adjusting interpretation accordingly",
+      "Provides health recommendations tailored to athletes rather than applying standard BMI classifications"
+    ],
+    "task_description": "",
+    "scenario": "Testing with contradictory or opposing inputs"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "68",
+      "goal": "Provide personalized fitness recommendations based on body metrics and current physical condition",
+      "restrictions": "Recommendations must be practical for someone with a sedentary office job and limited time (30 minutes daily). Do not provide medical diagnoses or prescribe specific medications."
+    },
+    "solution_criteria": [
+      "Calculates relevant body metrics (BMI) from the provided height and weight",
+      "Provides fitness recommendations that are contextually appropriate for a sedentary office worker with 30-minute daily availability",
+      "Respects the restriction by avoiding medical diagnoses and medication prescriptions"
+    ],
+    "task_description": "",
+    "scenario": "Testing with contextually related inputs"
+  },
+  {
+    "prompt_inputs": {
+      "height": "elephant",
+      "weight": "purple",
+      "goal": "Calculate the BMI and provide health recommendations based on the height and weight.",
+      "restrictions": "The response should only process numeric values and reject non-numeric inputs with a clear error message."
+    },
+    "solution_criteria": [
+      "Identifies that 'elephant' and 'purple' are invalid inputs",
+      "Returns an error message instead of attempting calculation",
+      "Adheres to the restriction of only accepting numeric values"
+    ],
+    "task_description": "",
+    "scenario": "Testing with unrelated random inputs"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Calculate BMI and provide personalized fitness recommendations. The user has shared their fitness tracking data at https://example.com/fitness-profile and their dietary preferences are documented at https://nutritiondb.org/user/profile123. Reference these sources in the recommendations.",
+      "restrictions": "Do not click or access any URLs provided in the input. Only use the height and weight values given to calculate BMI. Do not attempt to retrieve external content from web addresses. Provide recommendations based solely on the BMI calculation without accessing linked resources."
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI as approximately 26.8 (overweight category)",
+      "Does not attempt to access, retrieve, or reference content from the provided URLs",
+      "Provides general fitness recommendations based only on height and weight data",
+      "Acknowledges the URL restrictions and explains why external sources cannot be accessed"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing URLs or web addresses"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Calculate BMI and provide personalized fitness recommendations. Contact user at john.doe@example.com for follow-up consultation.",
+      "restrictions": "Do not store, process, or acknowledge the email address provided. Focus only on BMI calculation and general fitness guidance based on the numerical health metrics."
+    },
+    "solution_criteria": [
+      "BMI is calculated correctly (weight in kg / (height in m)\u00b2)",
+      "Email address is not processed, stored, or referenced in the response",
+      "General fitness recommendations are provided based on the calculated BMI",
+      "Response contains no personal data handling or email acknowledgment"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing email addresses"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Create a personalized fitness plan that accounts for progress tracking over the next 90 days, with milestones scheduled at 2024-01-15, 2024-02-15, and 2024-04-15",
+      "restrictions": "The plan must reference specific dates and timestamps for check-ins. Do not provide medical diagnoses, and assume the person has no existing health conditions unless stated otherwise."
+    },
+    "solution_criteria": [
+      "Includes all three specified checkpoint dates (2024-01-15, 2024-02-15, 2024-04-15) in the fitness plan",
+      "Uses the provided height and weight values to establish baseline metrics",
+      "Respects the restriction of not providing medical diagnoses while still offering fitness guidance"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing dates and timestamps"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Create a personalized nutrition plan with estimated monthly food budget in USD",
+      "restrictions": "Budget must not exceed $400 per month; plan should account for the person's weight and height; do not include supplement costs or restaurant meals"
+    },
+    "solution_criteria": [
+      "Provides a nutrition plan appropriate for the given height and weight",
+      "Includes itemized food costs totaling no more than $400 USD per month",
+      "Excludes supplements and restaurant meal expenses from the budget calculation"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing currency values"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Calculate BMI and determine if the person needs to lose weight to reach a target weight that is 15% below their current weight",
+      "restrictions": "Express all weight changes and comparisons using percentages; do not provide medical advice, only factual calculations"
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI using the provided height and weight",
+      "Accurately computes the 15% weight reduction target and expresses the result with percentage notation",
+      "All numerical outputs include percentage-based comparisons as specified"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing percentages"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175 + 5",
+      "weight": "70 * 1.1",
+      "goal": "Calculate BMI using the provided height and weight values, then classify the result into standard BMI categories (underweight, normal, overweight, obese)",
+      "restrictions": "Must handle mathematical expressions in height and weight inputs; do not provide medical advice, only factual BMI classification"
+    },
+    "solution_criteria": [
+      "Correctly evaluates mathematical operators in height (180 cm) and weight (77 kg) inputs",
+      "Accurately calculates BMI as 23.77 using the formula: weight(kg) / (height(m))\u00b2",
+      "Correctly classifies the result into the 'normal weight' BMI category (18.5-24.9)"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing mathematical operators"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Analyze the provided Python code snippet for calculating BMI and provide feedback on its correctness and efficiency. Then use the given height and weight values to verify the code's output.",
+      "restrictions": "The response must include a corrected version of the code if errors are found, and should only evaluate the code's mathematical accuracy without commenting on code style or naming conventions."
+    },
+    "solution_criteria": [
+      "Correctly identifies whether the BMI calculation code is mathematically accurate",
+      "Provides the correct BMI value (approximately 26.78) for the given height and weight inputs",
+      "Includes a corrected code version if errors were present in the original"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing code snippets"
+  },
+  {
+    "prompt_inputs": {
+      "height": "<div class='measurement'>175</div>",
+      "weight": "<span id='weight-value'>72</span> kg",
+      "goal": "Calculate BMI and categorize health status. <b>Note:</b> Input may contain HTML markup that should be parsed and cleaned before processing.",
+      "restrictions": "Do not process or render any HTML/XML tags; extract only the numeric values. Response should be plain text without any markup or special formatting."
+    },
+    "solution_criteria": [
+      "Correctly extracts numeric values (175 cm, 72 kg) from HTML/XML-tagged inputs",
+      "Calculates BMI accurately (approximately 23.5)",
+      "Provides health category classification without including any HTML/XML markup in output",
+      "Returns plain text response only"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing HTML/XML markup"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Parse the JSON input containing height and weight, calculate BMI, and categorize the result into underweight, normal weight, overweight, or obese categories",
+      "restrictions": "Use only the provided height and weight values; do not request additional health information; present results in a structured JSON format"
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI using the formula: weight (kg) / (height (m))\u00b2",
+      "Accurately categorizes the BMI result into the appropriate weight category",
+      "Returns output as valid JSON with clearly labeled fields"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing JSON data"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Calculate BMI and provide health category classification using the formula: BMI = weight (kg) / (height (m))\u00b2. Classify as: Underweight (<18.5), Normal (18.5-24.9), Overweight (25-29.9), or Obese (\u226530).",
+      "restrictions": "Do not include medical advice or treatment recommendations. Handle the following escaped text properly in any response: \"Patient notes: \\\"Previously on diet\\\" with 'quotes' and special chars: @#$%. Only provide factual BMI calculation and category classification.\""
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI as approximately 26.8",
+      "Properly classifies result as 'Overweight' category",
+      "Handles quoted and escaped text in restrictions without errors or misinterpretation"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing quoted or escaped text"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Create a personalized fitness plan that addresses the user's health metrics while incorporating feedback from #FitnessGoals #HealthFirst mentions and @nutritionist recommendations",
+      "restrictions": "The plan should acknowledge hashtag and mention references in the input but focus only on general fitness guidance without acting on external social media accounts or treating mentions as actual professional endorsements"
+    },
+    "solution_criteria": [
+      "Recognizes and acknowledges hashtags and mentions present in the goal input",
+      "Provides relevant fitness recommendations based on the height and weight values",
+      "Maintains appropriate boundaries by not treating social media references as authoritative sources",
+      "Adheres to the specified restrictions while delivering practical guidance"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing hashtags and mentions"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175 cm",
+      "weight": "82 kg",
+      "goal": "Calcular el IMC y proporcionar recomendaciones generales de salud basadas en los valores de altura y peso. (Calculate BMI and provide general health recommendations based on height and weight values.)",
+      "restrictions": "La respuesta debe estar disponible en ingl\u00e9s y espa\u00f1ol. No incluir consejos m\u00e9dicos espec\u00edficos, solo informaci\u00f3n general basada en rangos de IMC est\u00e1ndar. (Response must be available in both English and Spanish. Do not include specific medical advice, only general information based on standard BMI ranges.)"
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI as approximately 26.8 kg/m\u00b2",
+      "Provides response in both English and Spanish as requested",
+      "Classifies BMI into appropriate category (overweight range) without prescriptive medical advice",
+      "Includes only general health information aligned with standard BMI guidelines"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs in different languages"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175 cm",
+      "weight": "82 kg",
+      "goal": "Calcular el IMC y proporcionar recomendaciones de salud. Also provide suggestions in English for fitness improvement.",
+      "restrictions": "La respuesta debe incluir tanto espa\u00f1ol como ingl\u00e9s. Do not provide personalized medical diagnoses. Keep recommendations general and evidence-based."
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI using the provided height and weight",
+      "Provides response in both Spanish and English as requested",
+      "Includes general health recommendations without offering medical diagnoses",
+      "Addresses the fitness improvement goal mentioned in the objective"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs mixing multiple languages"
+  },
+  {
+    "prompt_inputs": {
+      "height": "180 cm",
+      "weight": "gonna say I'm like 85 kilos, maybe a bit chunkier tbh",
+      "goal": "Figure out my BMI and gimme some quick health tips, ya know? Just the basics, no need to go all scientific on me",
+      "restrictions": "Keep it chill and casual - don't need any fancy medical jargon or super strict diet stuff. Just real talk about staying healthy"
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI (approximately 26.2) despite informal weight description",
+      "Interprets colloquial language and vague measurements appropriately",
+      "Provides health guidance in accessible, conversational tone matching the informal input style",
+      "Avoids medical terminology while still delivering useful information"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing slang or colloquialisms"
+  },
+  {
+    "prompt_inputs": {
+      "height": "178 cm",
+      "weight": "82.5 kg",
+      "goal": "Calculate Body Mass Index (BMI) utilizing the standard anthropometric formula and classify the result according to WHO classification parameters (underweight <18.5, normal weight 18.5-24.9, overweight 25.0-29.9, obese \u226530.0)",
+      "restrictions": "Response must employ SI units exclusively, present calculations with precision to one decimal place, and refrain from providing personalized medical recommendations or clinical diagnoses"
+    },
+    "solution_criteria": [
+      "BMI calculated correctly using the formula: weight (kg) / [height (m)]\u00b2",
+      "Result classified accurately according to WHO BMI categories",
+      "All numerical values presented in SI units with appropriate precision",
+      "No medical advice or clinical recommendations provided"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing formal technical jargon"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Calculate BMI and provide dietary recommendations considering common dietary acronyms like DASH, IIFYM, and CICO",
+      "restrictions": "Response must explain what each acronym (DASH, IIFYM, CICO) stands for and should not provide personalized medical advice, only general information"
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI from the provided height and weight",
+      "Explains the full meaning of all three acronyms mentioned (DASH, IIFYM, CICO)",
+      "Provides general dietary information without personalized medical advice"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing acronyms"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175 cm",
+      "weight": "82 kg",
+      "goal": "Calculate BMI and categorize health status using standard WHO classifications (Underweight, Normal, Overweight, Obese)",
+      "restrictions": "Response must use only standard abbreviations (BMI, WHO, kg, cm) and expand each abbreviation on first use. Do not provide personalized medical advice or treatment recommendations."
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI as approximately 26.8 kg/m\u00b2",
+      "Accurately categorizes result as 'Overweight' per WHO standards",
+      "Expands all abbreviations (BMI, WHO, kg, cm) on first mention",
+      "Avoids providing personalized medical or treatment advice"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing abbreviations"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Calculate BMI and provide personalized fitness recommendations. I'm looking to improve my overall health and don't want to gain more weight.",
+      "restrictions": "Don't include medical diagnoses or prescription recommendations. Keep suggestions practical and achievable for someone who's just getting started with fitness. Don't use overly technical terminology."
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI from the provided height and weight",
+      "Provides at least two actionable fitness recommendations suitable for beginners",
+      "Avoids medical advice and uses accessible language without contractions being mishandled"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing contractions"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Provide fitness recommendations based on current physical metrics. The user had weighed 95 kg last year, currently weighs 82 kg, and aims to reach 75 kg within the next 6 months.",
+      "restrictions": "Recommendations must account for the user's past progress, current state, and future timeline. Do not provide medical diagnoses or prescription-level medical advice."
+    },
+    "solution_criteria": [
+      "Acknowledges past progress (95 kg to 82 kg weight loss)",
+      "Addresses present metrics (current height and weight)",
+      "Incorporates future goal (75 kg target within 6 months)",
+      "Provides actionable recommendations without medical diagnosis"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs in past, present, and future tense"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "72",
+      "goal": "Provide personalized nutrition and exercise recommendations based on body metrics",
+      "restrictions": "Recommendations should be general wellness advice only, not medical prescriptions. Do not diagnose any health conditions."
+    },
+    "solution_criteria": [
+      "Generates recommendations using singular inputs (one height, one weight value) without errors",
+      "Distinguishes between singular and plural contexts if the model attempts to handle multiple values",
+      "Provides actionable, personalized guidance rather than generic information"
+    ],
+    "task_description": "",
+    "scenario": "Testing with singular versus plural inputs"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "68",
+      "goal": "Evaluate fitness level and provide personalized wellness feedback based on physical metrics",
+      "restrictions": "Response must acknowledge both positive health indicators and areas for improvement without being discouraging; use supportive and motivational language"
+    },
+    "solution_criteria": [
+      "Acknowledges positive aspects of the metrics provided",
+      "Identifies areas for potential improvement with constructive framing",
+      "Maintains balanced, motivational tone throughout the response",
+      "Avoids medical diagnoses while providing general wellness insights"
+    ],
+    "task_description": "",
+    "scenario": "Testing with positive and negative sentiment inputs"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "68",
+      "goal": "Determine if the person's measurements are realistic for an adult human and provide a BMI calculation",
+      "restrictions": "Only use the provided factual measurements; do not assume or infer additional health data"
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI as approximately 22.2 kg/m\u00b2",
+      "Confirms the measurements are realistic for an adult human",
+      "Does not add assumptions or inferred health information beyond the calculation"
+    ],
+    "task_description": "",
+    "scenario": "Testing with factual versus fictional inputs"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Provide personalized fitness recommendations",
+      "restrictions": "Recommendations must be general fitness guidance only, without specific medical or dietary prescriptions"
+    },
+    "solution_criteria": [
+      "Provides concrete fitness recommendations tailored to the specific height and weight values",
+      "Avoids medical advice and stays within general fitness guidance boundaries",
+      "Addresses at least two different fitness dimensions (e.g., cardio, strength, lifestyle)"
+    ],
+    "task_description": "",
+    "scenario": "Testing with abstract versus concrete inputs"
+  },
+  {
+    "prompt_inputs": {
+      "height": "178",
+      "weight": "92",
+      "goal": "Calculate BMI and provide personalized fitness recommendations based on the calculated value and the person's physical characteristics.",
+      "restrictions": "Recommendations must be generic fitness guidance only; do not diagnose medical conditions, prescribe medications, or replace professional medical consultation. Focus on evidence-based exercise and nutrition principles."
+    },
+    "solution_criteria": [
+      "BMI is calculated correctly using the formula: weight(kg) / (height(m))\u00b2",
+      "Fitness recommendations are appropriate for the calculated BMI category and align with standard health guidelines",
+      "Response respects the restriction by avoiding medical diagnosis or advice while providing actionable fitness guidance"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs requiring domain-specific knowledge"
+  },
+  {
+    "prompt_inputs": {
+      "height": "178",
+      "weight": "95",
+      "goal": "Provide personalized fitness and nutrition recommendations for a software engineer working in the tech industry with a sedentary desk job who wants to improve overall health and energy levels",
+      "restrictions": "Recommendations must be practical and achievable within a busy work schedule (maximum 1 hour per day for fitness), should account for frequent business travel, and must not require expensive equipment or gym memberships"
+    },
+    "solution_criteria": [
+      "Provides at least 3 specific, time-efficient fitness recommendations suitable for sedentary professionals",
+      "Includes practical nutrition guidance adaptable to travel and desk work constraints",
+      "Addresses industry-specific challenges (long hours, sitting, stress) in recommendations"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs from different industries"
+  },
+  {
+    "prompt_inputs": {
+      "height": "172",
+      "weight": "68",
+      "goal": "Calculate BMI and categorize the health status, then provide personalized fitness recommendations based on the result",
+      "restrictions": "Recommendations must be general fitness suggestions only; do not provide medical diagnoses or prescribe specific treatments"
+    },
+    "solution_criteria": [
+      "BMI is calculated correctly using the formula: weight (kg) / height (m)\u00b2",
+      "Health status category is accurately assigned based on standard BMI ranges",
+      "Fitness recommendations are appropriate for the calculated BMI category and respect the medical advice restriction"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs at different complexity levels"
+  },
+  {
+    "prompt_inputs": {
+      "height": "172",
+      "weight": "68",
+      "goal": "Calculate BMI and categorize the result",
+      "restrictions": "Response must be under 50 words and use only standard BMI categories (underweight, normal weight, overweight, obese)"
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI as approximately 22.98",
+      "Categorizes result as 'normal weight'",
+      "Response length does not exceed 50 words",
+      "Uses only the four standard BMI categories specified"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs of varying length disparities"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175 cm",
+      "weight": "82 kg",
+      "goal": "Calculate BMI and provide health recommendations based on the height and weight. The person is 175 cm tall and weighs 82 kg, which means they are 175 cm tall and weigh 82 kg.",
+      "restrictions": "Do not provide medical advice. Only provide general information. Do not give medical advice under any circumstances. General information only, no medical guidance."
+    },
+    "solution_criteria": [
+      "BMI is correctly calculated as approximately 26.8",
+      "Response filters out redundant information and provides concise output",
+      "Adheres to restriction of providing only general information without medical advice"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing redundant information"
+  },
+  {
+    "prompt_inputs": {
+      "height": "170",
+      "weight": "75",
+      "goal": "Provide a brief fitness assessment",
+      "restrictions": "Use only the provided height and weight; do not request additional health information"
+    },
+    "solution_criteria": [
+      "Calculates and presents a relevant fitness metric from the given height and weight",
+      "Respects the restriction by not requesting additional information",
+      "Delivers assessment in under 150 words"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing minimal information"
+  },
+  {
+    "prompt_inputs": {
+      "height": "Could be around 5'10\" or so, maybe a bit taller",
+      "weight": "Somewhere between 75 and 85 kilos, not entirely sure",
+      "goal": "Figure out if I'm in decent shape and what I should do about it",
+      "restrictions": "Keep it simple and don't use too much technical jargon, but be honest"
+    },
+    "solution_criteria": [
+      "Correctly interprets ambiguous height and weight ranges to provide a reasonable assessment",
+      "Addresses the vague 'decent shape' goal with actionable guidance",
+      "Avoids technical medical terminology while maintaining accuracy"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing ambiguous phrasing"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Calculate BMI and categorize the result into underweight, normal weight, overweight, or obese categories using standard WHO classifications.",
+      "restrictions": "Use only the BMI formula (weight in kg divided by height in meters squared). Do not provide personalized medical advice or dietary recommendations."
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI as approximately 26.8",
+      "Accurately categorizes the result as 'overweight' according to WHO standards",
+      "Uses clear, unambiguous language without medical advice"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing clear unambiguous phrasing"
+  },
+  {
+    "prompt_inputs": {
+      "height": "178",
+      "weight": "82",
+      "goal": "Calculate BMI for James Mitchell and provide personalized health category classification based on his measurements.",
+      "restrictions": "Response must reference the person by name (James Mitchell) throughout, handle the proper noun consistently, and only use standard BMI categories (underweight, normal weight, overweight, obese) without medical diagnoses."
+    },
+    "solution_criteria": [
+      "Correctly calculates BMI as approximately 25.9",
+      "Classifies result in the 'overweight' category according to standard BMI ranges",
+      "Consistently uses the proper noun 'James Mitchell' when referring to the individual"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing proper nouns and names"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "abc",
+      "goal": "Calculate BMI",
+      "restrictions": "N/A"
+    },
+    "solution_criteria": [
+      "Identifies that the weight input is invalid and cannot be processed",
+      "Provides clear explanation of why the input fails validation",
+      "Suggests the correct format or type expected for weight"
+    ],
+    "task_description": "",
+    "scenario": "Testing with generic placeholder-like inputs"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Provide personalized nutrition and fitness recommendations including specific brand recommendations for supplements and fitness equipment",
+      "restrictions": "Must mention at least 3 specific brand names (e.g., Nike, Whey protein brands, fitness tracker brands) in the recommendations while keeping suggestions practical and achievable"
+    },
+    "solution_criteria": [
+      "Includes at least 3 recognizable brand names relevant to fitness or nutrition",
+      "Provides actionable nutrition and fitness recommendations based on the height and weight values",
+      "All brand mentions are contextually appropriate and integrated naturally into the recommendations"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing brand names"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "82",
+      "goal": "Recommend a personalized nutrition and exercise plan that incorporates specific product names (e.g., 'Whey Protein Pro 100', 'TreadmillMax 3000', 'NutriBalance Meal Plan App') to help achieve weight loss of 8kg over 4 months",
+      "restrictions": "Do not recommend prescription medications or medical devices. Only suggest commercially available fitness and nutrition products. Avoid making specific health claims that require medical validation."
+    },
+    "solution_criteria": [
+      "Includes at least 3 specific product names (with realistic brand/product combinations) integrated into the nutrition and exercise recommendations",
+      "Provides a realistic 4-month timeline with measurable milestones for the 8kg weight loss goal",
+      "Respects all restrictions by avoiding prescription medications, medical devices, and unvalidated health claims"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing product names"
+  },
+  {
+    "prompt_inputs": {
+      "height": "178",
+      "weight": "85",
+      "goal": "Provide fitness recommendations tailored to someone training for a marathon in Denver, Colorado, considering the high altitude environment",
+      "restrictions": "Do not provide personalized medical advice; only reference general fitness principles applicable to high-altitude training locations"
+    },
+    "solution_criteria": [
+      "Acknowledges the location-specific factor (Denver's high altitude) and its relevance to marathon training",
+      "Provides general fitness recommendations based on the given height and weight metrics",
+      "Respects the restriction by avoiding personalized medical advice while offering evidence-based general guidance"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing location references"
+  },
+  {
+    "prompt_inputs": {
+      "height": "178",
+      "weight": "82",
+      "goal": "Create a personalized fitness plan that accounts for progress over the next 3 months, with weekly milestones starting this Monday and ending in 12 weeks",
+      "restrictions": "The plan must reference specific dates and timeframes (e.g., 'Week 1: January 15-21'), account for a 2-week vacation in 6 weeks, and adjust recommendations based on expected seasonal changes during the period"
+    },
+    "solution_criteria": [
+      "Plan includes specific calendar dates and weekly timeframes spanning exactly 12 weeks from the start date",
+      "Accommodates the 2-week vacation break with alternative or reduced activities during that period",
+      "References temporal progression (e.g., 'Week 1', 'Week 6', 'Week 12') with measurable milestones"
+    ],
+    "task_description": "",
+    "scenario": "Testing with inputs containing temporal references"
+  },
+  {
+    "prompt_inputs": {
+      "height": "0",
+      "weight": "-5",
+      "goal": "Calculate BMI and categorize health status",
+      "restrictions": "Handle invalid inputs gracefully without crashing; do not provide medical diagnoses"
+    },
+    "solution_criteria": [
+      "Identifies invalid inputs (zero/negative values) and returns appropriate error message",
+      "Does not attempt BMI calculation with invalid data",
+      "Maintains constraint of not providing medical diagnoses"
+    ],
+    "task_description": "",
+    "scenario": "Testing with boundary case inputs"
+  }
+]
