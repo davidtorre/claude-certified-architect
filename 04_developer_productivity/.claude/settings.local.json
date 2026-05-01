@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/Scripts/python.exe _doc_build/make_images.py)",
+      "Bash(.venv/Scripts/python.exe -m pip install matplotlib --quiet)",
+      "Bash(node -e \"console.log\\(require.resolve\\('docx'\\)\\)\")",
+      "Bash(npm root *)",
+      "Bash(NODE_PATH=\"C:/Users/david.torre/AppData/Roaming/npm/node_modules\" node _doc_build/build_docx.js)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "my-database",
+    "search-engine"
+  ]
+}

@@ -19,7 +19,14 @@ Only if sources disagree. One bullet per disagreement with both values and sourc
 2-3 bullets max.
 
 ### Coverage Gaps
-Note any topic areas where information was not available.
+For each gap, produce a structured annotation with:
+- **Topic/subtopic**: what area has incomplete coverage (e.g., "regulatory landscape in the EU")
+- **Source attempted**: the URL or query that was tried
+- **Error**: what failure occurred (e.g., timeout, access denied, no results)
+- **Partial information**: any partial data available (title, excerpt, related finding), or "none" if nothing was recovered
+- **Reliability impact**: whether this gap affects the reliability of findings in the report (e.g., "low — alternate sources cover this area", "high — no other source addresses this subtopic")
+
+If no gaps exist, write "None." under this heading.
 
 ### Sources
 List of all sources referenced (publication name, date, URL).

@@ -26,7 +26,7 @@ _console = Console(file=sys.stdout)
 _spinner = None
 
 # --- Prompt loading ---
-
+# Load a prompt template providing a filename
 def load_prompt(filename):
     """Load a prompt template from the prompts/ directory."""
     prompt_path = os.path.join(os.path.dirname(__file__), "prompts", filename)

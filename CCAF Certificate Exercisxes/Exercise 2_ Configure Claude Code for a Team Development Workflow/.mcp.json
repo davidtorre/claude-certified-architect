@@ -1,0 +1,57 @@
+{
+  "_comment_purpose": [
+    "STEP 4 of Exercise 2 — Project-level .mcp.json.",
+    "",
+    "This file declares MCP servers that EVERY teammate working in this",
+    "repository should have available. It's checked into git, so the team",
+    "shares one source of truth.",
+    "",
+    "Three things to notice:",
+    "",
+    "1. ENV VAR EXPANSION — Values like ${GITHUB_TOKEN} are expanded by",
+    "   Claude Code at startup. NEVER hardcode secrets in this file. The",
+    "   convention: each developer sets the env var locally (in their",
+    "   shell or via direnv); the placeholder shows what variable is",
+    "   needed.",
+    "",
+    "2. DESCRIPTIONS — Each server has a description. Claude Code uses",
+    "   that to decide WHEN to invoke the server. A bad description ('A",
+    "   useful tool') means Claude Code will call the wrong server. Be",
+    "   specific.",
+    "",
+    "3. PROJECT vs PERSONAL — Anything experimental or personal goes in",
+    "   YOUR ~/.claude.json, NOT here. See personal-mcp-example.json for",
+    "   the shape of that file.",
+    "",
+    "(Some MCP server runtimes ignore _comment_* keys; if yours doesn't,",
+    "strip them before checking in.)"
+  ],
+  "mcpServers": {
+    "github": {
+      "_description": "Read-only GitHub access for issues, PRs, and code search across the org.",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "postgres-readonly": {
+      "_description": "Read-only access to the local development database. Use for ad-hoc queries while debugging — NEVER for application code (which goes through the repository pattern).",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "${TASKFLOW_DEV_DATABASE_URL}"
+      ]
+    },
+    "team-docs": {
+      "_description": "The team's internal documentation site. Use for product specs, architecture decisions, runbooks. NOT for code — code lives in the repo.",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"],
+      "env": {
+        "BASE_URL": "${TEAM_DOCS_URL}",
+        "API_KEY":  "${TEAM_DOCS_API_KEY}"
+      }
+    }
+  }
+}

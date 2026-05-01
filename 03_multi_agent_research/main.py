@@ -106,7 +106,7 @@ async def fetch_document(args):
 
     # [Task 5.3] — simulated timeout for error propagation testing
     if url == TIMEOUT_URL:
-        # TODO [Task 2.2, 5.3]: Return a structured error response that gives
+        # DONE [Task 2.2, 5.3]: Return a structured error response that gives
         # the coordinator enough context to make an intelligent recovery decision.
         #
         # Replace this generic error with a structured response containing:
@@ -123,7 +123,25 @@ async def fetch_document(args):
         # timed out" with no context about what was attempted, what partial data
         # is available, or what alternatives exist. This prevents intelligent
         # recovery. [Task 5.3]
-        error_text = "Error: Request timed out."
+        
+        # Find the article excerpt for partial results
+        partial = None
+        for article in ARTICLES:
+            if article["url"] == url:
+                partial = article["excerpt"]
+                break
+
+        error_data = {
+            "error": True,
+            "failure_type": "timeout",
+            "attempted_url": url,
+            "partial_results": partial,
+            "alternatives": (
+                "Use the search excerpt as a partial source, or "
+                "search for alternative articles on surgical planning."
+            ),
+        }
+        error_text = json.dumps(error_data, indent=2)
         content = [{"type": "text", "text": error_text}]
         response = {"content": content, "isError": True}
         return response

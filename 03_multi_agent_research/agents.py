@@ -36,11 +36,7 @@ def build_agents():
                 "sources are available before deep analysis."
             ),
             prompt=search_prompt,
-            # TODO [Task 2.3]: Restrict this agent to only the search tool.
-            # Add: tools=["mcp__research__web_search"]
-            # Without restriction, the agent inherits ALL tools and may
-            # misuse fetch_document or other tools outside its search role.
-            # Too many tools (18 vs 4-5) degrades tool selection reliability.
+            tools=["mcp__research__web_search"],
         ),
         "analysis-agent": AgentDefinition(
             # [Task 2.1] description differentiates from search agent
@@ -50,10 +46,7 @@ def build_agents():
                 "search-agent has found relevant URLs to analyze in depth."
             ),
             prompt=analysis_prompt,
-            # TODO [Task 2.3]: Restrict this agent to only the fetch tool.
-            # Add: tools=["mcp__research__fetch_document"]
-            # Agents with out-of-role tools tend to misuse them — an analysis
-            # agent might attempt web searches instead of analyzing documents.
+            tools=["mcp__research__fetch_document"],
         ),
         "synthesis-agent": AgentDefinition(
             # [Task 2.1] description clarifies this agent receives data, not fetches it
@@ -64,11 +57,7 @@ def build_agents():
                 "Does NOT write files — pass its output to the report-agent."
             ),
             prompt=synthesis_prompt,
-            # TODO [Task 2.3]: Restrict this agent to NO tools.
-            # Add: tools=[]
-            # The synthesis agent receives ALL findings directly in its prompt
-            # from the coordinator — it does not need any tools.
-            # A synthesis agent attempting web searches violates role boundaries.
+            tools=[],
         ),
         "report-agent": AgentDefinition(
             # [Task 2.1] description clarifies this agent formats, not analyzes
@@ -79,10 +68,7 @@ def build_agents():
                 "synthesis in its prompt and returns formatted markdown."
             ),
             prompt=report_prompt,
-            # TODO [Task 2.3]: Restrict this agent to NO tools.
-            # Add: tools=[]
-            # The report agent receives synthesis output in its prompt and
-            # returns formatted markdown — file saving is handled by main.py.
+            tools=[],
         ),
     }
     return agents

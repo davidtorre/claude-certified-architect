@@ -148,56 +148,55 @@ async def run_query(user_query):
     system_prompt = load_prompt("system_prompt.txt")
 
     # --- Scratchpad ---
-    # TODO [Step 6, Task 5.4]: Enable scratchpad persistence.
+    # DONE [Step 6, Task 5.4]: Enable scratchpad persistence.
     # Replace the TWO lines below with:
-    #
-    # scratchpad_path = os.path.join(lab_dir, "scratch.md")
-    # if os.path.exists(scratchpad_path):
-    #     with open(scratchpad_path, "r") as f:
-    #         scratchpad_content = f.read()
-    # else:
-    #     scratchpad_content = "No previous findings."
-    #
-    # scratchpad_instructions = (
-    #     "After answering each question, write a brief summary of your "
-    #     "key findings to scratch.md. Include file paths, function "
-    #     "locations, and architectural insights you discovered. Before "
-    #     "answering a new question, review the scratchpad above for "
-    #     "relevant prior findings that may save you from re-exploring."
-    # )
-    scratchpad_content = "No previous findings."  # ← replace this
-    scratchpad_instructions = ""                   # ← replace this
+    scratchpad_path = os.path.join(lab_dir, "scratch.md")
+    if os.path.exists(scratchpad_path):
+         with open(scratchpad_path, "r") as f:
+             scratchpad_content = f.read()
+    else:
+         scratchpad_content = "No previous findings."
+    
+    scratchpad_instructions = (
+        "After answering each question, write a brief summary of your "
+        "key findings to scratch.md. Include file paths, function "
+        "locations, and architectural insights you discovered. Before "
+        "answering a new question, review the scratchpad above for "
+        "relevant prior findings that may save you from re-exploring."
+    )
+
+    # scratchpad_instructions = ""                   # ← replace this
 
     # --- MCP tool guidance in system prompt ---
-    # TODO [Step 4, Task 2.1]: Add guidance so the agent knows when to use
+    # DONE [Step 4, Task 2.1]: Add guidance so the agent knows when to use
     # the MCP docs tool instead of Grep. Without this, the system prompt's
     # "use Grep for content search" wording biases the agent toward Grep
     # even when lookup_docs has a better description.
     #
-    # mcp_tool_guidance = (
-    #     "- **lookup_docs** (MCP) — search project documentation: "
-    #     "architecture decisions, API specs, onboarding guides, tech debt. "
-    #     "Returns structured results with title, section, and content. "
-    #     "Use this for documentation questions; use Grep for source code.\n"
-    # )
-    mcp_tool_guidance = ""
+    mcp_tool_guidance = (
+         "- **lookup_docs** (MCP) — search project documentation: "
+         "architecture decisions, API specs, onboarding guides, tech debt. "
+         "Returns structured results with title, section, and content. "
+         "Use this for documentation questions; use Grep for source code.\n"
+    )
+    # mcp_tool_guidance = ""
 
     # --- Explore subagent guidance in system prompt ---
-    # TODO [Step 5, Task 1.3]: Add guidance so the agent knows when to
+    # DONE [Step 5, Task 1.3]: Add guidance so the agent knows when to
     # delegate to the Explore subagent. Without this, the agent handles
     # all questions directly with Grep/Read even when delegation would
     # be more appropriate.
     #
-    # explore_guidance = (
-    #     "## Delegation\n\n"
-    #     "For complex questions that require reading multiple files, "
-    #     "tracing dependencies across modules, or analyzing architecture "
-    #     "patterns, delegate to the **explore** subagent using the Agent "
-    #     "tool. The subagent investigates autonomously and returns a "
-    #     "structured summary. Use direct Grep/Read only for simple, "
-    #     "single-file lookups.\n"
-    # )
-    explore_guidance = ""
+    explore_guidance = (
+         "## Delegation\n\n"
+         "For complex questions that require reading multiple files, "
+         "tracing dependencies across modules, or analyzing architecture "
+         "patterns, delegate to the **explore** subagent using the Agent "
+         "tool. The subagent investigates autonomously and returns a "
+         "structured summary. Use direct Grep/Read only for simple, "
+         "single-file lookups.\n"
+    )
+    # explore_guidance = ""
 
     system_prompt = system_prompt.format(
         scratchpad_content=scratchpad_content,
@@ -207,30 +206,32 @@ async def run_query(user_query):
     )
 
     # --- MCP documentation server ---
-    # TODO [Step 4, Task 2.4]: Create the MCP documentation server and
+    # DONE [Step 4, Task 2.4]: Create the MCP documentation server and
     # add it to the ClaudeAgentOptions below.
     # Import the lookup_docs tool and wire it up:
     #
-    # from tools import lookup_docs
-    # docs_server = create_sdk_mcp_server(
-    #     name="docs",
-    #     version="1.0.0",
-    #     tools=[lookup_docs],
-    # )
+    from tools import lookup_docs
+    docs_server = create_sdk_mcp_server(
+         name="docs",
+         version="1.0.0",
+         tools=[lookup_docs],
+    )
 
     # --- Explore subagent ---
-    # TODO [Step 5, Task 1.3]: Build the Explore subagent and add it to
+    # DONE [Step 5, Task 1.3]: Build the Explore subagent and add it to
     # the ClaudeAgentOptions below.
     # Import and build the subagent definition:
     #
-    # from agents import build_explore_agent
-    # agents = build_explore_agent()
+    from agents import build_explore_agent
+    agents = build_explore_agent()
 
     # --- Tool list ---
     # [Task 2.5] — built-in tools for codebase exploration
     allowed_tools = ["Read", "Write", "Edit", "Grep", "Glob"]
-    # TODO [Step 4]: allowed_tools.append("mcp__docs__lookup_docs")
-    # TODO [Step 5]: allowed_tools.append("Agent")
+    # DONE [Step 4]: allowed_tools.append("mcp__docs__lookup_docs")
+    allowed_tools.append("mcp__docs__lookup_docs")
+    # DONE [Step 5]: allowed_tools.append("Agent")
+    allowed_tools.append("Agent")
 
     hooks = {
         "PreToolUse": [
@@ -249,10 +250,13 @@ async def run_query(user_query):
         async for message in query(
             prompt=user_query,
             options=ClaudeAgentOptions(
+                model="claude-sonnet-4-6",
                 system_prompt=system_prompt,
                 allowed_tools=allowed_tools,
-                # TODO [Step 4]: mcp_servers={"docs": docs_server},
-                # TODO [Step 5]: agents=agents,
+                # DONE [Step 4]: mcp_servers={"docs": docs_server},
+                mcp_servers={"docs": docs_server},
+                # DONE [Step 5]: agents=agents,
+                agents=agents,
                 permission_mode="bypassPermissions",
                 hooks=hooks,
                 max_turns=10,

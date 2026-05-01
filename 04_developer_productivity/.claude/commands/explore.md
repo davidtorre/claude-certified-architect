@@ -1,9 +1,9 @@
 ---
-# TODO [Step 7, Task 3.2]: Complete this skill frontmatter. Add the following fields:
-#   context: fork
-#   allowed-tools: Read, Grep, Glob
-#   argument-hint: "What part of the codebase should I explore?"
-#
+# DONE [Step 7, Task 3.2]: Complete this skill frontmatter. Add the following fields:
+context: fork
+allowed-tools: Read, Grep, Glob
+argument-hint: "What part of the codebase should I explore?"
+
 # context:fork runs this skill in an isolated sub-agent so verbose
 # codebase discovery output does not pollute the main conversation.
 # allowed-tools restricts the skill to read-only exploration tools.

@@ -36,8 +36,8 @@ def build_explore_agent():
                 "simple single-file lookups — use Read or Grep directly."
             ),
             prompt=explore_prompt,
-            # TODO [Step 5, Task 2.3]: Restrict this subagent to read-only tools.
-            # Add: tools=["Read", "Grep", "Glob"]
+            # DONE [Step 5, Task 2.3]: Restrict this subagent to read-only tools.
+            tools=["Read", "Grep", "Glob"]
             # Without restriction, the subagent inherits ALL tools —
             # it could use Write, Edit, or even Agent (spawning sub-subagents).
             # The Explore subagent should only READ, never modify files.

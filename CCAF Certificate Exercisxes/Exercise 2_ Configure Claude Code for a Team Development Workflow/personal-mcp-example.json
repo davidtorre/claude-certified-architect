@@ -1,0 +1,42 @@
+{
+  "_comment_purpose": [
+    "STEP 4 of Exercise 2 — Personal MCP example.",
+    "",
+    "This file is an EXAMPLE of what a personal/experimental MCP server",
+    "block looks like. It belongs in YOUR ~/.claude.json, NOT in this",
+    "repository. We include it here only as a reference.",
+    "",
+    "WHY two locations?",
+    "",
+    "  Project-level (.mcp.json, checked into git):",
+    "    - Servers everyone needs",
+    "    - Stable, reviewed by the team",
+    "    - Updates ship via PRs",
+    "",
+    "  Personal (~/.claude.json, in your home dir):",
+    "    - Experimental servers you're trying out",
+    "    - Personal API keys you don't want anyone else using",
+    "    - Tools relevant only to your workflow (e.g. your music app)",
+    "",
+    "If you put experimental stuff in .mcp.json, you'll either commit",
+    "your secrets or every teammate will get errors about a server they",
+    "don't have credentials for. Keep them separate.",
+    "",
+    "To use this example: copy the mcpServers block into your own",
+    "~/.claude.json (creating that file if needed). Anything in",
+    "~/.claude.json is merged with the project-level .mcp.json at",
+    "Claude Code startup — your personal servers appear alongside the",
+    "team ones."
+  ],
+  "mcpServers": {
+    "experimental-jira": {
+      "_description": "Personal Jira sandbox. Lets me query my assigned tickets without leaving Claude Code. Not shared with the team — they have their own credentials.",
+      "command": "npx",
+      "args": ["-y", "@some-experimental/jira-mcp"],
+      "env": {
+        "JIRA_BASE_URL":  "${MY_PERSONAL_JIRA_URL}",
+        "JIRA_API_TOKEN": "${MY_PERSONAL_JIRA_TOKEN}"
+      }
+    }
+  }
+}

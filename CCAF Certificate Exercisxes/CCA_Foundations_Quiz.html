@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Certified Architect — Foundations · Practice Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F0E6;
+    --bg-card: #FBF7EE;
+    --bg-elev: #FFFFFF;
+    --ink: #18120C;
+    --ink-soft: #4A3F33;
+    --ink-muted: #8A7E6E;
+    --line: #E2D8C4;
+    --line-strong: #C9BCA0;
+    --accent: #C4633F;
+    --accent-deep: #8E3F1F;
+    --accent-soft: #F1D9C8;
+    --good: #4A6B3D;
+    --good-soft: #DAE5C9;
+    --bad: #A23B2D;
+    --bad-soft: #EFCFC8;
+    --ring: rgba(196, 99, 63, 0.18);
+    --shadow-sm: 0 1px 2px rgba(24,18,12,0.04), 0 1px 1px rgba(24,18,12,0.03);
+    --shadow-md: 0 4px 12px rgba(24,18,12,0.06), 0 2px 4px rgba(24,18,12,0.04);
+    --shadow-lg: 0 18px 40px -12px rgba(24,18,12,0.18), 0 6px 14px rgba(24,18,12,0.06);
+    --serif: 'Instrument Serif', 'Georgia', serif;
+    --sans: 'Geist', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', 'SFMono-Regular', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 15% 8%, rgba(196,99,63,0.08), transparent 40%),
+      radial-gradient(circle at 88% 92%, rgba(74,107,61,0.05), transparent 45%);
+    background-attachment: fixed;
+  }
+
+  .app {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ─── Header ─── */
+  header.brand {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand-mark {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .brand-mark::before {
+    content: "✦";
+    margin-right: 8px;
+    color: var(--accent);
+    font-style: normal;
+  }
+  .brand-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-muted);
+  }
+
+  /* ─── Progress bar ─── */
+  .progress-wrap {
+    display: none;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-muted);
+  }
+  .progress-wrap.visible { display: flex; }
+  .progress-track {
+    flex: 1;
+    height: 3px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+    width: 0%;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .progress-score {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ─── Screen base ─── */
+  .screen { display: none; animation: fadeIn 0.5s ease; }
+  .screen.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── Intro screen ─── */
+  .intro-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .intro-title {
+    font-family: var(--serif);
+    font-size: clamp(48px, 7vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .intro-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .intro-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+  }
+  .intro-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    margin: 36px 0 40px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stat {
+    padding: 22px 18px;
+    border-right: 1px solid var(--line);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 36px;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+  }
+  .intro-note {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 560px;
+    line-height: 1.65;
+  }
+  .intro-note strong { color: var(--ink); font-weight: 600; }
+
+  /* ─── Buttons ─── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 26px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--accent-deep);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  .btn-primary:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 14px 22px;
+  }
+  .btn-ghost:hover {
+    color: var(--ink);
+    background: var(--bg-card);
+  }
+  .btn-arrow { font-size: 16px; transition: transform 0.2s; }
+  .btn-primary:hover .btn-arrow { transform: translateX(3px); }
+
+  /* ─── Question card ─── */
+  .scenario-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+  }
+  .question-text {
+    font-family: var(--serif);
+    font-size: clamp(24px, 3.2vw, 30px);
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+  .question-text code {
+    font-family: var(--mono);
+    font-size: 0.78em;
+    background: var(--bg-card);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    color: var(--accent-deep);
+    font-style: normal;
+  }
+
+  /* ─── Options ─── */
+  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    text-align: left;
+    font: inherit;
+    color: var(--ink-soft);
+    width: 100%;
+  }
+  .option:hover:not(:disabled):not(.locked) {
+    border-color: var(--line-strong);
+    background: var(--bg-elev);
+    transform: translateX(2px);
+  }
+  .option.selected {
+    border-color: var(--accent);
+    background: var(--bg-elev);
+    color: var(--ink);
+    box-shadow: 0 0 0 3px var(--ring);
+  }
+  .option:disabled, .option.locked { cursor: default; }
+  .option.correct {
+    border-color: var(--good);
+    background: var(--good-soft);
+    color: var(--ink);
+  }
+  .option.incorrect {
+    border-color: var(--bad);
+    background: var(--bad-soft);
+    color: var(--ink);
+  }
+  .option.faded { opacity: 0.45; }
+
+  .option-letter {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-elev);
+    border: 1px solid var(--line-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    transition: all 0.18s ease;
+  }
+  .option.selected .option-letter {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  .option.correct .option-letter {
+    background: var(--good);
+    border-color: var(--good);
+    color: white;
+  }
+  .option.incorrect .option-letter {
+    background: var(--bad);
+    border-color: var(--bad);
+    color: white;
+  }
+  .option-text {
+    flex: 1;
+    font-size: 14.5px;
+    line-height: 1.55;
+    padding-top: 3px;
+  }
+  .option-text code {
+    font-family: var(--mono);
+    font-size: 0.82em;
+    background: rgba(24,18,12,0.05);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--accent-deep);
+  }
+  .option.correct .option-text code,
+  .option.incorrect .option-text code {
+    background: rgba(255,255,255,0.5);
+  }
+
+  /* ─── Feedback panel ─── */
+  .feedback {
+    display: none;
+    margin-bottom: 28px;
+    padding: 24px 26px;
+    border-radius: 12px;
+    border-left: 3px solid;
+    background: var(--bg-elev);
+    box-shadow: var(--shadow-sm);
+    animation: slideIn 0.4s ease;
+  }
+  .feedback.visible { display: block; }
+  .feedback.right { border-left-color: var(--good); }
+  .feedback.wrong { border-left-color: var(--bad); }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .feedback-verdict {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 12px;
+  }
+  .feedback.right .feedback-verdict { color: var(--good); }
+  .feedback.wrong .feedback-verdict { color: var(--bad); }
+  .feedback-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+  }
+  .feedback.right .feedback-icon { background: var(--good); }
+  .feedback.wrong .feedback-icon { background: var(--bad); }
+  .feedback-label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .feedback-body {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+  .feedback-body code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--bg-card);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--accent-deep);
+  }
+
+  /* ─── Action row ─── */
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .actions-left { display: flex; gap: 8px; }
+
+  /* ─── Results screen ─── */
+  .results-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .results-title {
+    font-family: var(--serif);
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .results-title em { font-style: italic; color: var(--accent); }
+  .results-verdict {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+  }
+  .score-display {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 32px;
+  }
+  .score-big {
+    font-family: var(--serif);
+    font-size: 96px;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+  }
+  .score-divider {
+    font-family: var(--serif);
+    font-size: 60px;
+    color: var(--ink-muted);
+    line-height: 1;
+  }
+  .score-total {
+    font-family: var(--serif);
+    font-size: 60px;
+    color: var(--ink-muted);
+    line-height: 1;
+  }
+  .score-pct {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+  }
+  .score-pct strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: 36px;
+    color: var(--ink);
+    line-height: 1;
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  /* ─── Review list ─── */
+  .review-heading {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+  }
+  .review-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .review-item:last-child { border-bottom: none; }
+  .review-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    width: 28px;
+  }
+  .review-mark {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: white;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  .review-mark.right { background: var(--good); }
+  .review-mark.wrong { background: var(--bad); }
+  .review-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    flex: 1;
+  }
+  .results-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 600px) {
+    .app { padding: 32px 18px 60px; }
+    .intro-stats { grid-template-columns: 1fr 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--line); }
+    .stat:nth-child(2n) { border-right: none; }
+    .stat:nth-last-child(-n+2) { border-bottom: none; }
+    .actions { flex-direction: column-reverse; align-items: stretch; }
+    .actions-left { justify-content: center; }
+    .btn { justify-content: center; }
+    .score-big { font-size: 72px; }
+    .score-divider, .score-total { font-size: 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="brand">
+    <div class="brand-mark">CCA — Foundations</div>
+    <div class="brand-meta" id="topMeta">Sample Practice</div>
+  </header>
+
+  <div class="progress-wrap" id="progressWrap">
+    <span id="progressLabel">01 / 12</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-score" id="progressScore">0 correct</span>
+  </div>
+
+  <!-- ─── Intro Screen ─── -->
+  <section class="screen active" id="introScreen">
+    <div class="intro-eyebrow">Claude Certified Architect</div>
+    <h1 class="intro-title">The <em>Foundations</em><br>practice quiz.</h1>
+    <p class="intro-sub">Twelve scenario-based questions from the official exam guide.</p>
+
+    <div class="intro-stats">
+      <div class="stat"><div class="stat-value">12</div><div class="stat-label">Questions</div></div>
+      <div class="stat"><div class="stat-value">5</div><div class="stat-label">Domains</div></div>
+      <div class="stat"><div class="stat-value">4</div><div class="stat-label">Choices each</div></div>
+      <div class="stat"><div class="stat-value">720</div><div class="stat-label">Pass score</div></div>
+    </div>
+
+    <p class="intro-note">
+      Each question is presented one at a time with full explanation feedback.
+      <strong>Answer options are shuffled</strong> on every attempt — so memorising the letter won't help.
+      Take your time; there's no timer.
+    </p>
+
+    <button class="btn btn-primary" id="startBtn">Begin practice <span class="btn-arrow">→</span></button>
+  </section>
+
+  <!-- ─── Question Screen ─── -->
+  <section class="screen" id="questionScreen">
+    <div class="scenario-tag" id="scenarioTag"></div>
+    <h2 class="question-text" id="questionText"></h2>
+    <div class="options" id="optionsList"></div>
+
+    <div class="feedback" id="feedback">
+      <div class="feedback-verdict" id="feedbackVerdict">
+        <span class="feedback-icon" id="feedbackIcon"></span>
+        <span id="feedbackVerdictText"></span>
+      </div>
+      <div class="feedback-label" id="feedbackLabel"></div>
+      <div class="feedback-body" id="feedbackBody"></div>
+    </div>
+
+    <div class="actions">
+      <div class="actions-left">
+        <button class="btn btn-ghost" id="restartMidBtn">Restart</button>
+      </div>
+      <button class="btn btn-primary" id="primaryBtn" disabled>Check answer</button>
+    </div>
+  </section>
+
+  <!-- ─── Results Screen ─── -->
+  <section class="screen" id="resultsScreen">
+    <div class="results-eyebrow">Practice complete</div>
+    <h1 class="results-title">Your <em>results</em>.</h1>
+    <p class="results-verdict" id="resultsVerdict"></p>
+
+    <div class="score-display">
+      <span class="score-big" id="scoreBig">0</span>
+      <span class="score-divider">/</span>
+      <span class="score-total" id="scoreTotal">12</span>
+      <div class="score-pct">Accuracy<strong id="scorePct">0%</strong></div>
+    </div>
+
+    <div class="review-heading">Question-by-question</div>
+    <div id="reviewList"></div>
+
+    <div class="results-actions">
+      <button class="btn btn-primary" id="restartBtn">Try again <span class="btn-arrow">↻</span></button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ─── Question data (from Claude Certified Architect — Foundations Exam Guide v0.1) ───
+const QUESTIONS = [
+  {
+    scenario: "Customer Support Resolution Agent",
+    question: "Production data shows that in 12% of cases, your agent skips <code>get_customer</code> entirely and calls <code>lookup_order</code> using only the customer's stated name, occasionally leading to misidentified accounts and incorrect refunds. What change would most effectively address this reliability issue?",
+    options: [
+      { id: "A", text: "Add a programmatic prerequisite that blocks <code>lookup_order</code> and <code>process_refund</code> calls until <code>get_customer</code> has returned a verified customer ID." },
+      { id: "B", text: "Enhance the system prompt to state that customer verification via <code>get_customer</code> is mandatory before any order operations." },
+      { id: "C", text: "Add few-shot examples showing the agent always calling <code>get_customer</code> first, even when customers volunteer order details." },
+      { id: "D", text: "Implement a routing classifier that analyzes each request and enables only the subset of tools appropriate for that request type." }
+    ],
+    correct: "A",
+    explanation: "When a specific tool sequence is required for critical business logic (like verifying customer identity before processing refunds), <strong>programmatic enforcement provides deterministic guarantees</strong> that prompt-based approaches cannot. Options B and C rely on probabilistic LLM compliance, which is insufficient when errors have financial consequences. Option D addresses tool availability rather than tool ordering, which isn't the actual problem."
+  },
+  {
+    scenario: "Customer Support Resolution Agent",
+    question: "Production logs show the agent frequently calls <code>get_customer</code> when users ask about orders (e.g., \"check my order #12345\"), instead of calling <code>lookup_order</code>. Both tools have minimal descriptions (\"Retrieves customer information\" / \"Retrieves order details\") and accept similar identifier formats. What's the most effective first step to improve tool selection reliability?",
+    options: [
+      { id: "A", text: "Add few-shot examples to the system prompt demonstrating correct tool selection patterns, with 5–8 examples showing order-related queries routing to <code>lookup_order</code>." },
+      { id: "B", text: "Expand each tool's description to include input formats it handles, example queries, edge cases, and boundaries explaining when to use it versus similar tools." },
+      { id: "C", text: "Implement a routing layer that parses user input before each turn and pre-selects the appropriate tool based on detected keywords and identifier patterns." },
+      { id: "D", text: "Consolidate both tools into a single <code>lookup_entity</code> tool that accepts any identifier and internally determines which backend to query." }
+    ],
+    correct: "B",
+    explanation: "<strong>Tool descriptions are the primary mechanism LLMs use for tool selection.</strong> When descriptions are minimal, models lack the context to differentiate between similar tools. Option B directly addresses this root cause with a low-effort, high-leverage fix. Few-shot examples (A) add token overhead without fixing the underlying issue. A routing layer (C) is over-engineered. Consolidating tools (D) is a valid architectural choice but heavier than warranted as a first step."
+  },
+  {
+    scenario: "Customer Support Resolution Agent",
+    question: "Your agent achieves 55% first-contact resolution, well below the 80% target. Logs show it escalates straightforward cases (standard damage replacements with photo evidence) while attempting to autonomously handle complex situations requiring policy exceptions. What's the most effective way to improve escalation calibration?",
+    options: [
+      { id: "A", text: "Add explicit escalation criteria to your system prompt with few-shot examples demonstrating when to escalate versus resolve autonomously." },
+      { id: "B", text: "Have the agent self-report a confidence score (1–10) before each response and automatically route requests to humans when confidence falls below a threshold." },
+      { id: "C", text: "Deploy a separate classifier model trained on historical tickets to predict which requests need escalation before the main agent begins processing." },
+      { id: "D", text: "Implement sentiment analysis to detect customer frustration levels and automatically escalate when negative sentiment exceeds a threshold." }
+    ],
+    correct: "A",
+    explanation: "Adding explicit escalation criteria with few-shot examples directly addresses the root cause: <strong>unclear decision boundaries.</strong> This is the proportionate first response before adding infrastructure. LLM self-reported confidence (B) is poorly calibrated — the agent is already incorrectly confident on hard cases. A separate classifier (C) is over-engineered before prompt optimization is tried. Sentiment (D) doesn't correlate with case complexity."
+  },
+  {
+    scenario: "Code Generation with Claude Code",
+    question: "You want to create a custom <code>/review</code> slash command that runs your team's standard code review checklist. This command should be available to every developer when they clone or pull the repository. Where should you create this command file?",
+    options: [
+      { id: "A", text: "In the <code>.claude/commands/</code> directory in the project repository." },
+      { id: "B", text: "In <code>~/.claude/commands/</code> in each developer's home directory." },
+      { id: "C", text: "In the <code>CLAUDE.md</code> file at the project root." },
+      { id: "D", text: "In a <code>.claude/config.json</code> file with a <code>commands</code> array." }
+    ],
+    correct: "A",
+    explanation: "Project-scoped custom slash commands belong in <code>.claude/commands/</code> within the repo. They are <strong>version-controlled and automatically available to all developers</strong> who clone or pull. <code>~/.claude/commands/</code> is for personal commands not shared via version control; <code>CLAUDE.md</code> is for project instructions, not command definitions; the <code>config.json</code> mechanism doesn't exist."
+  },
+  {
+    scenario: "Code Generation with Claude Code",
+    question: "You've been assigned to restructure the team's monolithic application into microservices. This will involve changes across dozens of files and requires decisions about service boundaries and module dependencies. Which approach should you take?",
+    options: [
+      { id: "A", text: "Enter plan mode to explore the codebase, understand dependencies, and design an implementation approach before making changes." },
+      { id: "B", text: "Start with direct execution and make changes incrementally, letting the implementation reveal the natural service boundaries." },
+      { id: "C", text: "Use direct execution with comprehensive upfront instructions detailing exactly how each service should be structured." },
+      { id: "D", text: "Begin in direct execution mode and only switch to plan mode if you encounter unexpected complexity during implementation." }
+    ],
+    correct: "A",
+    explanation: "Plan mode is designed for <strong>complex tasks involving large-scale changes, multiple valid approaches, and architectural decisions</strong> — exactly what monolith-to-microservices restructuring requires. It enables safe codebase exploration before committing. Option B risks costly rework when dependencies are discovered late; C assumes you already know the right structure; D ignores that the complexity is already stated in the requirements."
+  },
+  {
+    scenario: "Code Generation with Claude Code",
+    question: "Your codebase has distinct areas with different conventions: React components use functional/hooks, API handlers use async/await with specific error handling, and database models follow a repository pattern. Test files are spread throughout the codebase alongside the code they test (e.g., <code>Button.test.tsx</code> next to <code>Button.tsx</code>), and you want all tests to follow the same conventions regardless of location. What's the most maintainable way to ensure Claude automatically applies the correct conventions?",
+    options: [
+      { id: "A", text: "Create rule files in <code>.claude/rules/</code> with YAML frontmatter specifying glob patterns to conditionally apply conventions based on file paths." },
+      { id: "B", text: "Consolidate all conventions in the root <code>CLAUDE.md</code> file under headers for each area, relying on Claude to infer which section applies." },
+      { id: "C", text: "Create skills in <code>.claude/skills/</code> for each code type that include the relevant conventions in their <code>SKILL.md</code> files." },
+      { id: "D", text: "Place a separate <code>CLAUDE.md</code> file in each subdirectory containing that area's specific conventions." }
+    ],
+    correct: "A",
+    explanation: "<code>.claude/rules/</code> with glob patterns (e.g., <code>**/*.test.tsx</code>) <strong>applies conventions automatically based on file paths regardless of directory location</strong> — essential for files spread throughout the codebase. Inference (B) is unreliable. Skills (C) require manual invocation, contradicting the need for deterministic automatic application. Subdirectory CLAUDE.md (D) can't easily handle files spread across many directories."
+  },
+  {
+    scenario: "Multi-Agent Research System",
+    question: "After running the system on \"impact of AI on creative industries,\" each subagent completes successfully but the final reports cover only visual arts, completely missing music, writing, and film. The coordinator's logs show it decomposed the topic into three subtasks: \"AI in digital art creation,\" \"AI in graphic design,\" and \"AI in photography.\" What is the most likely root cause?",
+    options: [
+      { id: "A", text: "The synthesis agent lacks instructions for identifying coverage gaps in the findings it receives from other agents." },
+      { id: "B", text: "The coordinator agent's task decomposition is too narrow, resulting in subagent assignments that don't cover all relevant domains of the topic." },
+      { id: "C", text: "The web search agent's queries are not comprehensive enough and need to be expanded to cover more creative industry sectors." },
+      { id: "D", text: "The document analysis agent is filtering out sources related to non-visual creative industries due to overly restrictive relevance criteria." }
+    ],
+    correct: "B",
+    explanation: "The coordinator's logs reveal the root cause directly: it decomposed \"creative industries\" into <strong>only visual arts subtasks</strong> (digital art, graphic design, photography), completely omitting music, writing, and film. The subagents executed their assigned tasks correctly — the problem is what they were assigned. Options A, C, and D incorrectly blame downstream agents working correctly within their assigned scope."
+  },
+  {
+    scenario: "Multi-Agent Research System",
+    question: "The web search subagent times out while researching a complex topic. You need to design how this failure information flows back to the coordinator agent. Which error propagation approach best enables intelligent recovery?",
+    options: [
+      { id: "A", text: "Return structured error context to the coordinator including the failure type, the attempted query, any partial results, and potential alternative approaches." },
+      { id: "B", text: "Implement automatic retry logic with exponential backoff within the subagent, returning a generic \"search unavailable\" status only after all retries are exhausted." },
+      { id: "C", text: "Catch the timeout within the subagent and return an empty result set marked as successful." },
+      { id: "D", text: "Propagate the timeout exception directly to a top-level handler that terminates the entire research workflow." }
+    ],
+    correct: "A",
+    explanation: "<strong>Structured error context gives the coordinator the information needed to make intelligent recovery decisions</strong> — retry with a modified query, try an alternative approach, or proceed with partial results. Generic statuses (B) hide context. Marking failure as success (C) prevents recovery and risks incomplete output. Terminating the entire workflow (D) is unnecessary when recovery strategies could succeed."
+  },
+  {
+    scenario: "Multi-Agent Research System",
+    question: "The synthesis agent frequently needs to verify claims while combining findings. Currently, it returns control to the coordinator, which invokes the web search agent, then re-invokes synthesis with results — adding 2–3 round trips per task and increasing latency by 40%. Evaluation shows 85% of verifications are simple fact-checks (dates, names, statistics) while 15% require deeper investigation. What's the most effective approach to reduce overhead while maintaining reliability?",
+    options: [
+      { id: "A", text: "Give the synthesis agent a scoped <code>verify_fact</code> tool for simple lookups, while complex verifications continue delegating to the web search agent through the coordinator." },
+      { id: "B", text: "Have the synthesis agent accumulate all verification needs and return them as a batch to the coordinator at the end of its pass, which then sends them all to the web search agent at once." },
+      { id: "C", text: "Give the synthesis agent access to all web search tools so it can handle any verification need directly without round-trips through the coordinator." },
+      { id: "D", text: "Have the web search agent proactively cache extra context around each source during initial research, anticipating what the synthesis agent might need to verify." }
+    ],
+    correct: "A",
+    explanation: "Option A applies the <strong>principle of least privilege</strong>: gives the synthesis agent only what it needs for the 85% common case while preserving the coordination pattern for complex cases. Batching (B) creates blocking dependencies since synthesis steps may depend on earlier verified facts. Full access (C) over-provisions and violates separation of concerns. Speculative caching (D) cannot reliably predict what will need verification."
+  },
+  {
+    scenario: "Claude Code for Continuous Integration",
+    question: "Your pipeline script runs <code>claude \"Analyze this pull request for security issues\"</code> but the job hangs indefinitely. Logs indicate Claude Code is waiting for interactive input. What's the correct approach to run Claude Code in an automated pipeline?",
+    options: [
+      { id: "A", text: "Add the <code>-p</code> flag: <code>claude -p \"Analyze this pull request for security issues\"</code>" },
+      { id: "B", text: "Set the environment variable <code>CLAUDE_HEADLESS=true</code> before running the command." },
+      { id: "C", text: "Redirect stdin from <code>/dev/null</code>: <code>claude \"...\" &lt; /dev/null</code>" },
+      { id: "D", text: "Add the <code>--batch</code> flag: <code>claude --batch \"...\"</code>" }
+    ],
+    correct: "A",
+    explanation: "The <code>-p</code> (or <code>--print</code>) flag is the documented way to <strong>run Claude Code in non-interactive mode</strong>. It processes the prompt, outputs the result to stdout, and exits without waiting for user input — exactly what CI/CD pipelines require. The other options reference non-existent features (<code>CLAUDE_HEADLESS</code>, <code>--batch</code>) or use Unix workarounds that don't address Claude Code's command syntax."
+  },
+  {
+    scenario: "Claude Code for Continuous Integration",
+    question: "Your team wants to reduce API costs. Real-time Claude calls power two workflows: (1) a blocking pre-merge check that must complete before developers can merge, and (2) a technical debt report generated overnight. Your manager proposes switching both to the Message Batches API for its 50% cost savings. How should you evaluate this proposal?",
+    options: [
+      { id: "A", text: "Use batch processing for the technical debt reports only; keep real-time calls for pre-merge checks." },
+      { id: "B", text: "Switch both workflows to batch processing with status polling to check for completion." },
+      { id: "C", text: "Keep real-time calls for both workflows to avoid batch result ordering issues." },
+      { id: "D", text: "Switch both to batch processing with a timeout fallback to real-time if batches take too long." }
+    ],
+    correct: "A",
+    explanation: "The Message Batches API offers 50% cost savings but has processing times <strong>up to 24 hours with no guaranteed latency SLA</strong>. This makes it unsuitable for blocking pre-merge checks where developers wait, but ideal for overnight batch jobs. Option B's \"often faster\" isn't acceptable for blocking workflows. Option C reflects a misconception — results can be correlated using <code>custom_id</code>. Option D adds unnecessary complexity."
+  },
+  {
+    scenario: "Claude Code for Continuous Integration",
+    question: "A pull request modifies 14 files across the stock tracking module. Your single-pass review analyzing all files together produces inconsistent results: detailed feedback for some files but superficial comments for others, obvious bugs missed, and contradictory feedback — flagging a pattern as problematic in one file while approving identical code elsewhere in the same PR. How should you restructure the review?",
+    options: [
+      { id: "A", text: "Split into focused passes: analyze each file individually for local issues, then run a separate integration-focused pass examining cross-file data flow." },
+      { id: "B", text: "Require developers to split large PRs into smaller submissions of 3–4 files before the automated review runs." },
+      { id: "C", text: "Switch to a higher-tier model with a larger context window to give all 14 files adequate attention in one pass." },
+      { id: "D", text: "Run three independent review passes on the full PR and only flag issues that appear in at least two of the three runs." }
+    ],
+    correct: "A",
+    explanation: "Splitting reviews into focused passes directly addresses the root cause: <strong>attention dilution</strong> when processing many files at once. File-by-file analysis ensures consistent depth, while a separate integration pass catches cross-file issues. Option B shifts burden to developers without improving the system. Option C misunderstands that larger context windows don't solve attention quality. Option D would suppress detection of real bugs caught only intermittently."
+  }
+];
+
+// ─── State ───
+const state = {
+  order: [],         // shuffled question indices
+  position: 0,       // current question index in order
+  answered: false,
+  selected: null,    // currently selected option id
+  optionMap: {},     // for current question: shuffled order of original ids
+  results: []        // {qIndex, scenario, correct: bool}
+};
+
+// ─── DOM refs ───
+const $ = (id) => document.getElementById(id);
+const introScreen = $('introScreen');
+const questionScreen = $('questionScreen');
+const resultsScreen = $('resultsScreen');
+const progressWrap = $('progressWrap');
+const progressLabel = $('progressLabel');
+const progressFill = $('progressFill');
+const progressScore = $('progressScore');
+const topMeta = $('topMeta');
+const scenarioTag = $('scenarioTag');
+const questionText = $('questionText');
+const optionsList = $('optionsList');
+const feedback = $('feedback');
+const feedbackVerdict = $('feedbackVerdict');
+const feedbackVerdictText = $('feedbackVerdictText');
+const feedbackIcon = $('feedbackIcon');
+const feedbackLabel = $('feedbackLabel');
+const feedbackBody = $('feedbackBody');
+const primaryBtn = $('primaryBtn');
+
+// ─── Utilities ───
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function showScreen(screen) {
+  [introScreen, questionScreen, resultsScreen].forEach(s => s.classList.remove('active'));
+  screen.classList.add('active');
+}
+function pad(n) { return String(n).padStart(2, '0'); }
+
+// ─── Quiz flow ───
+function startQuiz() {
+  state.order = QUESTIONS.map((_, i) => i); // keep original order — scenarios cluster meaningfully
+  state.position = 0;
+  state.results = [];
+  progressWrap.classList.add('visible');
+  topMeta.textContent = 'In progress';
+  loadQuestion();
+  showScreen(questionScreen);
+}
+
+function loadQuestion() {
+  const qIdx = state.order[state.position];
+  const q = QUESTIONS[qIdx];
+
+  state.answered = false;
+  state.selected = null;
+
+  // Shuffle option display order; keep mapping back to original ids
+  const displayLetters = ['A', 'B', 'C', 'D'];
+  const shuffledOptions = shuffle(q.options);
+  state.optionMap = {};
+  shuffledOptions.forEach((opt, i) => {
+    state.optionMap[displayLetters[i]] = opt.id;
+  });
+
+  // Update progress
+  progressLabel.textContent = `${pad(state.position + 1)} / ${pad(QUESTIONS.length)}`;
+  progressFill.style.width = `${(state.position / QUESTIONS.length) * 100}%`;
+  const correctCount = state.results.filter(r => r.correct).length;
+  progressScore.textContent = `${correctCount} correct`;
+
+  // Render question
+  scenarioTag.textContent = q.scenario;
+  questionText.innerHTML = q.question;
+
+  optionsList.innerHTML = '';
+  shuffledOptions.forEach((opt, i) => {
+    const displayLetter = displayLetters[i];
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.dataset.displayLetter = displayLetter;
+    btn.dataset.originalId = opt.id;
+    btn.innerHTML = `
+      <span class="option-letter">${displayLetter}</span>
+      <span class="option-text">${opt.text}</span>
+    `;
+    btn.addEventListener('click', () => selectOption(displayLetter));
+    optionsList.appendChild(btn);
+  });
+
+  // Reset feedback + button
+  feedback.classList.remove('visible', 'right', 'wrong');
+  primaryBtn.textContent = 'Check answer';
+  primaryBtn.disabled = true;
+}
+
+function selectOption(displayLetter) {
+  if (state.answered) return;
+  state.selected = displayLetter;
+  document.querySelectorAll('.option').forEach(el => {
+    el.classList.toggle('selected', el.dataset.displayLetter === displayLetter);
+  });
+  primaryBtn.disabled = false;
+}
+
+function checkAnswer() {
+  const qIdx = state.order[state.position];
+  const q = QUESTIONS[qIdx];
+  const selectedOriginalId = state.optionMap[state.selected];
+  const isCorrect = selectedOriginalId === q.correct;
+
+  state.answered = true;
+  state.results.push({ qIndex: qIdx, scenario: q.scenario, correct: isCorrect });
+
+  // Find display letter of correct answer
+  const correctDisplayLetter = Object.keys(state.optionMap).find(
+    k => state.optionMap[k] === q.correct
+  );
+
+  // Mark options
+  document.querySelectorAll('.option').forEach(el => {
+    el.classList.add('locked');
+    el.disabled = true;
+    const dl = el.dataset.displayLetter;
+    if (dl === correctDisplayLetter) {
+      el.classList.add('correct');
+      el.classList.remove('selected');
+    } else if (dl === state.selected && !isCorrect) {
+      el.classList.add('incorrect');
+      el.classList.remove('selected');
+    } else {
+      el.classList.add('faded');
+    }
+  });
+
+  // Show feedback
+  feedback.classList.add('visible', isCorrect ? 'right' : 'wrong');
+  feedbackVerdictText.textContent = isCorrect ? 'Correct' : 'Not quite';
+  feedbackIcon.textContent = isCorrect ? '✓' : '✕';
+  feedbackLabel.innerHTML = isCorrect
+    ? `You picked the right answer — option ${correctDisplayLetter}.`
+    : `The correct answer is option ${correctDisplayLetter}.`;
+  feedbackBody.innerHTML = q.explanation;
+
+  // Update progress (correct count)
+  const correctCount = state.results.filter(r => r.correct).length;
+  progressScore.textContent = `${correctCount} correct`;
+  progressFill.style.width = `${((state.position + 1) / QUESTIONS.length) * 100}%`;
+
+  // Update button
+  if (state.position < QUESTIONS.length - 1) {
+    primaryBtn.textContent = 'Next question';
+    primaryBtn.innerHTML = 'Next question <span class="btn-arrow">→</span>';
+  } else {
+    primaryBtn.innerHTML = 'See results <span class="btn-arrow">→</span>';
+  }
+
+  // Smooth scroll feedback into view
+  feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function advance() {
+  if (!state.answered) return;
+  if (state.position < QUESTIONS.length - 1) {
+    state.position++;
+    loadQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  progressWrap.classList.remove('visible');
+  topMeta.textContent = 'Complete';
+
+  const correctCount = state.results.filter(r => r.correct).length;
+  const total = QUESTIONS.length;
+  const pct = Math.round((correctCount / total) * 100);
+
+  $('scoreBig').textContent = correctCount;
+  $('scoreTotal').textContent = total;
+  $('scorePct').textContent = `${pct}%`;
+
+  let verdict;
+  if (pct === 100) verdict = "Perfect score. You've internalized every pattern.";
+  else if (pct >= 90) verdict = "Excellent — you're ready for the real exam.";
+  else if (pct >= 75) verdict = "Strong showing. Review the misses and run it again.";
+  else if (pct >= 50) verdict = "Solid foundation, but a few patterns need reinforcement.";
+  else verdict = "Worth re-reading the exam guide before another pass.";
+  $('resultsVerdict').textContent = verdict;
+
+  // Build review list
+  const reviewList = $('reviewList');
+  reviewList.innerHTML = '';
+  state.results.forEach((r, i) => {
+    const item = document.createElement('div');
+    item.className = 'review-item';
+    item.innerHTML = `
+      <span class="review-num">${pad(i + 1)}</span>
+      <span class="review-mark ${r.correct ? 'right' : 'wrong'}">${r.correct ? '✓' : '✕'}</span>
+      <span class="review-tag">${r.scenario}</span>
+    `;
+    reviewList.appendChild(item);
+  });
+
+  showScreen(resultsScreen);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+  startQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── Wire up ───
+$('startBtn').addEventListener('click', startQuiz);
+$('restartBtn').addEventListener('click', restart);
+$('restartMidBtn').addEventListener('click', () => {
+  if (confirm('Restart the quiz? Current progress will be lost.')) restart();
+});
+primaryBtn.addEventListener('click', () => {
+  if (state.answered) advance();
+  else if (state.selected) checkAnswer();
+});
+
+// Keyboard: 1-4 to select, Enter to submit/advance
+document.addEventListener('keydown', (e) => {
+  if (!questionScreen.classList.contains('active')) return;
+  if (e.key >= '1' && e.key <= '4' && !state.answered) {
+    const letters = ['A', 'B', 'C', 'D'];
+    selectOption(letters[parseInt(e.key, 10) - 1]);
+  } else if (e.key === 'Enter') {
+    if (state.answered) advance();
+    else if (state.selected) checkAnswer();
+  }
+});
+</script>
+</body>
+</html>

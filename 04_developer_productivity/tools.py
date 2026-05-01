@@ -10,7 +10,7 @@ from data import DOCS
 # to call this tool or a built-in tool like Grep.
 @tool(
     "lookup_docs",
-    # TODO [Step 4, Task 2.1]: This description is too vague — the agent cannot tell
+    # DONE [Step 4, Task 2.1]: This description is too vague — the agent cannot tell
     # what this tool offers that Grep doesn't. Enhance it to include:
     #   - What content it searches (API specs, architecture decisions,
     #     onboarding guides, known tech debt — NOT source code)
@@ -20,7 +20,16 @@ from data import DOCS
     #   - Example queries: "architecture", "API endpoints", "tech debt"
     # A clear description outcompetes built-in tools by telling the agent
     # exactly when this tool is the better choice.
-    "Search documentation.",
+    (
+    "Search internal project documentation including architecture "
+    "decisions, API specifications, onboarding guides, and known "
+    "technical debt. Returns structured results with title, section, "
+    "and full content. Use this for questions about system design, "
+    "API contracts, project conventions, and architectural decisions. "
+    "Use Grep instead for searching source code patterns. "
+    "Example queries: 'architecture overview', 'API endpoints', "
+    "'onboarding', 'tech debt'."
+    ),
     {"query": str},
 )
 async def lookup_docs(args):

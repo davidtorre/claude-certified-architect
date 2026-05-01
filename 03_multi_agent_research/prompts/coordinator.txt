@@ -35,3 +35,13 @@ Decompose the research topic into broad subtopics that together provide comprehe
 ## Error handling
 
 If a subagent reports an error (timeout, access denied), continue with results from other subagents. Do not terminate the entire research workflow because one source was unavailable.
+
+When passing findings to the synthesis agent, include structured error context for every failure encountered during search or analysis, so the synthesis agent can annotate coverage gaps accurately:
+
+- `failure_type`: the class of error (e.g., `timeout`, `access_denied`, `not_found`, `fetch_error`, `no_results`)
+- `attempted_url`: the specific URL or query that failed
+- `partial_results`: any partial data that was obtained before the failure (e.g., title and excerpt from search results even if the full document could not be fetched)
+- `topic_area`: which subtopic or angle of the research this gap affects (e.g., "regulatory landscape", "economic impact")
+- `reason`: a short human-readable explanation (e.g., "fetch timed out after 30s", "403 access denied", "no matching results returned")
+
+Explicitly list which topic areas have gaps and why, so the synthesis agent can mark them under Coverage Gaps rather than silently omitting them.

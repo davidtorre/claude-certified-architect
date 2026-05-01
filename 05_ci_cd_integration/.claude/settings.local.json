@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where claude *)",
+      "Bash(claude --version)",
+      "Bash(python -m unittest test_utils_new -v)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "my-database",
+    "search-engine"
+  ]
+}
